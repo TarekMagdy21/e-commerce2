@@ -51,7 +51,7 @@ const Login = () => {
               }}
             />
             <img
-              className="cursor-pointer ml-5"
+              className="cursor-pointer ml-9"
               src={facebook}
               onClick={() => {
                 console.log("Facebook");
