@@ -5,10 +5,11 @@ import google from "../../assets/google.svg";
 import facebook from "../../assets/facebook.svg";
 import apple from "../../assets/Apple.svg";
 import { TextField } from "@mui/material";
-import Button from "@mui/material/Button";
 
 import { useForm, Controller } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
+  const navigate = useNavigate();
   const { control, handleSubmit } = useForm({
     defaultValues: { email: "", password: "" },
   });
@@ -36,12 +37,20 @@ const Login = () => {
           <p className="ml-auto">
             {" "}
             No Account? <br />
-            <span className="text-[#4C85BD]">Sign up</span>
+            <span
+              className="text-[#4C85BD]"
+              onClick={() => {
+                navigate("/signup");
+              }}
+            >
+              Sign up
+            </span>
           </p>
         </div>
-        <p className="text-end my-5 text-4xl">Sign in</p>
+        <p className=" my-5 text-5xl">Sign in</p>
         <div className="flex items-center justify-between">
           <img
+            alt="google"
             className="cursor-pointer  "
             src={google}
             onClick={() => {
@@ -49,6 +58,7 @@ const Login = () => {
             }}
           />
           <img
+            alt="facebook"
             className="cursor-pointer ml-[1%]"
             src={facebook}
             onClick={() => {
@@ -56,6 +66,7 @@ const Login = () => {
             }}
           />
           <img
+            alt="apple"
             className="cursor-pointer ml-[1%]"
             src={apple}
             onClick={() => {
@@ -101,7 +112,6 @@ const Login = () => {
                   className="bg-white focus:border-blue-500"
                   label="Password"
                   variant="outlined"
-                  autoFocus
                   fullWidth
                 />
               )}

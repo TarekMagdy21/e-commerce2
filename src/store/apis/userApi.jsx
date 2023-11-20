@@ -17,6 +17,14 @@ export const userApi = createApi({
       }),
       invalidatesTags: ["User"],
     }),
+    postSignup: mutation({
+      query: (body) => ({
+        url: `signup`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["User"],
+    }),
   }),
 });
-export const { usePostLoginMutation } = userApi;
+export const { usePostLoginMutation,usePostSignupMutation } = userApi;
