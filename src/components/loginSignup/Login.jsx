@@ -9,64 +9,66 @@ import Button from "@mui/material/Button";
 
 import { useForm, Controller } from "react-hook-form";
 const Login = () => {
-  const { control, handleSubmit } = useForm();
-
+  const { control, handleSubmit } = useForm({
+    defaultValues: { email: "", password: "" },
+  });
   const [login] = usePostLoginMutation();
 
   const onSubmit = async (data) => {
     console.log(data);
     // Make API call to login and get the token
-    // login({ email: "tarek@test.com", password: "24400590Asd@" }).then(
-    //   (result) => {
-    //     Cookies.set("authToken", result.data.token);
-    //   }
-    // );
+    login({ email: data?.email, password: data?.password })
+      .then((result) => {
+        Cookies.set("authToken", result.data.token);
+      })
+      .catch((error) => {
+        console.log("Error", error);
+      });
   };
 
   return (
-    <section className="w-full h-screen bg-cover bg-chair bg-left xl:bg-center flex justify-center items-center">
-      <div className="bg-white bg-opacity-75 border rounded-[2.5rem] w-4/5 h-4/5 p-[6%]">
-        <div className="grid grid-cols-3 gap-y-7">
-          <p className="col-span-2 font-poppins font-medium">
-            Welcome to <span className="text-[#4F89C1] uppercase">Matgary</span>
+    <section className="w-screen h-screen bg-cover bg-chair bg-left xl:bg-center flex justify-center items-center">
+      <div className="bg-white bg-opacity-75 border rounded-[6%] w-[90%] h-[90%] p-[7%]">
+        <div className="flex whitespace-nowrap text-[0.8rem] font-poppins above400:text-[1rem]">
+          <p>
+            Welcome to <span className="text-[#4C85BD]">MATGARY</span>
           </p>
-          <p className="text-lg text-[#8D8D8D] text-[1rem] font-poppins">
+          <p className="ml-auto">
+            {" "}
             No Account? <br />
-            <span
-              className="text-[#4F89C1] font-normal cursor-pointer"
-              onClick={() => {
-                console.log("Nice");
-              }}
-            >
-              Sign up
-            </span>
+            <span className="text-[#4C85BD]">Sign up</span>
           </p>
-          <p className="text-5xl col-span-3 text-end font-poppins">Sign in</p>
-          <div className="flex col-span-3">
-            <img
-              className="cursor-pointer ml-4"
-              src={google}
-              onClick={() => {
-                console.log("Google");
-              }}
-            />
-            <img
-              className="cursor-pointer ml-5"
-              src={facebook}
-              onClick={() => {
-                console.log("Facebook");
-              }}
-            />
-            <img
-              className="cursor-pointer ml-4"
-              src={apple}
-              onClick={() => {
-                console.log("apple");
-              }}
-            />
-          </div>
-          <form onSubmit={handleSubmit(onSubmit)} className="col-span-3">
-            <p className="mb-3 ml-1 font-poppins text-[1rem] font-medium">
+        </div>
+        <p className="text-end my-5 text-4xl">Sign in</p>
+        <div className="flex items-center justify-between">
+          <img
+            className="cursor-pointer  "
+            src={google}
+            onClick={() => {
+              console.log("Google");
+            }}
+          />
+          <img
+            className="cursor-pointer ml-[1%]"
+            src={facebook}
+            onClick={() => {
+              console.log("Facebook");
+            }}
+          />
+          <img
+            className="cursor-pointer ml-[1%]"
+            src={apple}
+            onClick={() => {
+              console.log("apple");
+            }}
+          />
+        </div>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="mt-4 flex flex-col gap-6 above400:gap-[3.325rem]"
+        >
+          <div>
+            <p className="mb-4 ml-1 font-poppins text-[1rem] font-normal leading-4">
               Enter your email address
             </p>
             <Controller
@@ -76,14 +78,17 @@ const Login = () => {
               render={({ field }) => (
                 <TextField
                   {...field}
-                  className="bg-white"
+                  className="bg-white focus:border-blue-500"
                   label="E-mail address"
                   variant="outlined"
+                  autoFocus
                   fullWidth
                 />
               )}
             />
-            <p className="mt-10 mb-3 ml-1 font-poppins text-[1rem] font-medium">
+          </div>
+          <div>
+            <p className="mb-4 ml-1 font-poppins text-[1rem] font-normal leading-4">
               Enter your Password
             </p>
             <Controller
@@ -93,23 +98,24 @@ const Login = () => {
               render={({ field }) => (
                 <TextField
                   {...field}
-                  className="bg-white"
+                  className="bg-white focus:border-blue-500"
                   label="Password"
                   variant="outlined"
+                  autoFocus
                   fullWidth
                 />
               )}
             />
-            <p className="my-5 text-end mr-2 text-[#4285F4]">
+          </div>
+          <div className="text-right">
+            <p className=" mb-4 text-end mr-2 text-[#4285F4]">
               Forgot Password?
-            </p>
-            <div className="text-right">
-              <button className="bg-[#4285F4] text-white font-poppins p-5 rounded-[0.625rem] w-[9.3125rem]">
-                Sign in
-              </button>
-            </div>
-          </form>
-        </div>
+            </p>{" "}
+            <button className="bg-[#4285F4] text-white font-poppins p-5 rounded-[0.625rem] w-[9.3125rem] ">
+              Sign in
+            </button>
+          </div>
+        </form>
       </div>
     </section>
   );
