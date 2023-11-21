@@ -1,9 +1,14 @@
 // src/App.js
-import React from "react";
 import "./App.css";
-import Login from "./components/loginSignup/Login";
+import { useNavigate } from "react-router-dom";
 function App() {
-  return <Login />;
+  const navigate = useNavigate();
+  return (
+    <div>
+      <button onClick={()=>{navigate('/login')}}>Login</button>
+      <button onClick={()=>{navigate('/signup')}}>Sign Up</button>
+    </div>
+  );
 }
 
 export default App;

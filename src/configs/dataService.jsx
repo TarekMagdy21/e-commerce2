@@ -2,6 +2,9 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 // Select one of the following BASE_URLs
+//?!toDO VITE_BASE_URL_DEVELOPMENT USE THIS WHEN WORKING ON LOCAL
+//? VITE_BASE_URL  USE THIS WHEN WORKING ON PRODUCTION
+
 export const NEW_BASE_URL = import.meta.env.VITE_BASE_URL;
 export const BASE_HEADERS = (headers) => {
   headers.set("Accept", "application/json");
